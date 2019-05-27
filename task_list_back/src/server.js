@@ -21,7 +21,7 @@ getContent = function () {
   }
   return content1
  }
-
+//console.log(getContent())
 app.get("/xlsx_data", (req,res) => res.send(JSON.stringify(getContent())))
 
 app.listen(3000, ()=>{console.log("Running")})

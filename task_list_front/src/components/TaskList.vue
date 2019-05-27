@@ -1,7 +1,8 @@
 <template>
   <div class="task-list">
-    <table style="margin:0 auto;">
-      <tr><th v-for="header in content[0]" :key="header.id">{{header}}</th></tr>
+    <p v-if="err!==''">{{err}}</p>
+    <table style="margin:0 auto;" v-if="content!==''">
+      <tr><th v-for="h in content[0]" :key="h.id">{{h}}</th></tr>
       <tr v-for="row in content.slice(1,)" :key=row.id>
         <td v-for="item in row" :key=item.id>{{item}}</td>
       </tr>
@@ -15,15 +16,15 @@ export default {
   name: 'TaskList',
   data: function(){
     return {
-      content: [
-      ]
+      content: '',
+      err: ''
     }
   },
   created() {
     axios.get('api/xlsx_data')
     .then((res)=>{
       //window.console.log(res.data)
-      this.content = res.data
+      this.err=res.data
     })
     .catch((err)=>this.content=err)
   },
