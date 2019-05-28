@@ -12,24 +12,30 @@
 
 <script>
 import axios from 'axios'
-axios.defaults.baseURL = 'http://localhost:3000/'
+import XLSX from 'xlsx'
+import transformSheets from '../scripts/read_xlsx'
 
 export default {
   name: 'TaskList',
-  data: function(){
+  data: function () {
     return {
       content: '',
       err: ''
     }
   },
   created() {
-    axios.get('/xlsx_data')
-    .then((res)=>{
-      //window.console.log(res.data)
-      this.content=res.data
+    var url = "http://localhost:8080/task_list.xlsx"
+    
+    axios.get(url, {responseType:'arraybuffer'})
+    .then((res) => {
+		var data = new Uint8Array(res.data)
+    var wb = XLSX.read(data, {type:"array"}, '-j')
+    var sheets = wb.Sheets
+    this.content = transformSheets(sheets)
+    }).catch( err =>{
+      this.err = err
     })
-    .catch((err)=>this.err=err)
-  },
+  }
 }
 </script>
 
@@ -61,5 +67,8 @@ padding: 5px 10px;
 font-size: 12px;
 font-family: Verdana;
 font-weight: bold;
+}
+p {
+  color: red
 }
 </style>
