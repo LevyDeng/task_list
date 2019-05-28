@@ -1,18 +1,17 @@
 const XLSX = require('xlsx')
 
-//var wb = XLSX.readFile('./task_list.xlsx')
-var sheets = ''
-
 //将行,列转换
 function transformSheets(sheets) {
   var content  = []
   var content1 = []
   var tmplist = []
   for (let key in sheets){
+    //读出来的workbook数据很难读,转换为json格式,参考https://github.com/SheetJS/js-xlsx#utility-functions
     tmplist.push(XLSX.utils.sheet_to_json(sheets[key]).length)
     content1.push(XLSX.utils.sheet_to_json(sheets[key]))
   }
   var maxLength = Math.max.apply(Math, tmplist)
+  //进行行列转换
   for (let y in [...Array(maxLength)]){
     content.push([])
     for (let x in [...Array(tmplist.length)]) {
