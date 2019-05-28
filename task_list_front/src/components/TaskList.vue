@@ -23,7 +23,7 @@ export default {
     }
   },
   created() {
-    axios.get('api/xlsx_data')
+    axios.get('/xlsx_data')
     .then((res)=>{
       //window.console.log(res.data)
       this.err=res.data
