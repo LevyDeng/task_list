@@ -24,7 +24,7 @@ export default {
     }
   },
   created() {
-    var url = "http://localhost:8080/task_list.xlsx"
+    var url = "/task_list.xlsx"
     
     axios.get(url, {responseType:'arraybuffer'})
     .then((res) => {
