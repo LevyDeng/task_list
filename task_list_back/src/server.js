@@ -8,10 +8,20 @@ getContent = function () {
   var content = xlsx.parse(xlsx_file_path)
   var content1 = []
   tmplist = []
-  for (y in [...Array(content[0].data.length)]){
+  for (x in [...Array(content.length)]){
+    console.log(x)
+    tmplist.push(content[x].data.length)
+  }
+  maxLength = Math.max.apply(Math,tmplist)
+  for (y in [...Array(maxLength)]){
     content1[y]=[]
     for(x in [...Array(content.length)]){
-      content1[y].push(content[x].data[y][0])
+      try {
+        content1[y].push(content[x].data[y][0])
+      } catch (error) {
+        console.log(error)
+        content1[y].push(' ')
+      }
     }
   }
   content1.unshift([])
