@@ -26,9 +26,9 @@ export default {
     axios.get('/xlsx_data')
     .then((res)=>{
       //window.console.log(res.data)
-      this.err=res.data
+      this.content=res.data
     })
-    .catch((err)=>this.content=err)
+    .catch((err)=>this.err=err)
   },
 }
 </script>
