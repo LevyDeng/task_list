@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "node-xlsx": "^0.15.0"
+  },
+  "dependencies": {
+    "xlsx": "^0.14.3"
+  }
+}

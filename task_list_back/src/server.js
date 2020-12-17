@@ -33,6 +33,7 @@ getContent = function () {
  }
 //console.log(getContent())
 app.get("/xlsx_data", (req,res) => {
+  console.log("Got connection from"+req.ip)
   res.header("Access-Control-Allow-Origin", "*")
   res.send(JSON.stringify(getContent()))})
 
